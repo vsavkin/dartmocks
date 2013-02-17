@@ -27,9 +27,16 @@ testStubbing() {
       expect(testStub.method(false), equals(20));
     });
 
+    test("stubs with multiple arguments", () {
+      var testStub = stub('Stub');
+      testStub.stub('method').with(1, true).andReturn(10);
+
+      expect(testStub.method(1, true), equals(10));
+    });
+
     test("stubs with consecutive return values", () {
       var testStub = stub('Stub');
-      testStub.stub("stubbedMethod").andReturnMultipleValue([10, 20]);
+      testStub.stub("stubbedMethod").andReturn(10, 20);
 
       expect(testStub.stubbedMethod(), equals(10));
       expect(testStub.stubbedMethod(), equals(20));
@@ -37,9 +44,10 @@ testStubbing() {
 
     test("stubs with consecutive return values throw an exception when no more return values", () {
       var testStub = stub('Stub');
-      testStub.stub("stubbedMethod").andReturnMultipleValue([10]);
+      testStub.stub("stubbedMethod").andReturn(10, 20);
 
       expect(testStub.stubbedMethod(), equals(10));
+      expect(testStub.stubbedMethod(), equals(20));
       expect(() => testStub.stubbedMethod(), throws);
     });
 

@@ -2,8 +2,8 @@ part of dartmocks;
 
 class TestDouble {
   ut.Mock _mock;
-  List<Behaviour> _stubs = [];
-  List<Behaviour> _expectations = [];
+  List<MethodBehaviour> _stubs = [];
+  List<MethodBehaviour> _expectations = [];
 
   String name;
   bool isNullObject = false;
@@ -15,14 +15,14 @@ class TestDouble {
     return this;
   }
 
-  Behaviour stub(String methodName) {
-    var b = new Behaviour(methodName);
+  MethodBehaviour stub(String methodName) {
+    var b = new MethodBehaviour(methodName);
     _stubs.add(b);
     return b;
   }
 
-  Behaviour shouldReceive(String methodName) {
-    var b = new Behaviour(methodName);
+  MethodBehaviour shouldReceive(String methodName) {
+    var b = new MethodBehaviour(methodName);
     _expectations.add(b);
     return b;
   }

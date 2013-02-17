@@ -1,19 +1,18 @@
 part of dartmocks;
 
 class CallMatcherBuilder {
-  build(Behaviour b){
-    if (b.hasArguments) {
-      return ut.callsTo(b.methodName, b.arguments);
-    } else {
-      return ut.callsTo(b.methodName);
-    }
+  build(MethodBehaviour b){
+    var cm = new ut.CallMatcher();
+    cm.nameFilter = matchers.wrapMatcher(b.methodName);
+    cm.argMatchers = b.arguments.map((_) => matchers.wrapMatcher(_)).toList();
+    return cm;
   }
 }
 
 class ExpectationBuilder {
   CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
 
-  build(Behaviour b, ut.Mock mock){
+  build(MethodBehaviour b, ut.Mock mock){
     var callMatcher = callMatcherBuilder.build(b);
     var verification = ut.happenedExactly(b._times);
     mock.getLogs(callMatcher).verify(verification);
@@ -23,7 +22,7 @@ class ExpectationBuilder {
 class StubBuilder {
   CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
 
-  build(Behaviour b, ut.Mock mock){
+  build(MethodBehaviour b, ut.Mock mock){
     var m = mock.when(callMatcherBuilder.build(b));
 
     if (b.hasCallback) {
@@ -41,26 +40,30 @@ class StubBuilder {
   }
 }
 
-class Behaviour {
+class _Empty{
+  const _Empty();
+}
+const _e = const _Empty();
+
+class MethodBehaviour {
   String methodName;
 
   var throwValue;
-  var returnValue;
   List returnValues;
-  var arguments;
+  var arguments = [];
   Function callback;
 
   int _times = 1;
 
-  Behaviour(this.methodName);
+  MethodBehaviour(this.methodName);
 
-  with(args) {
-    arguments = args;
+  with(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+    arguments = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }
 
-  andReturn(value) {
-    returnValue = value;
+  andReturn(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+    returnValues = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }
 
@@ -74,21 +77,18 @@ class Behaviour {
     return this;
   }
 
-  andReturnMultipleValue(List values) {
-    returnValues = values;
-    return this;
-  }
-
   times(int value) {
     _times = value;
     return this;
   }
 
-  bool get hasArguments => arguments != null;
+  get returnValue => returnValues != null ? returnValues.first : null;
   bool get throws => throwValue != null;
   bool get hasCallback => callback != null;
-  bool get hasMultipleReturnValues => returnValues != null;
+  bool get hasMultipleReturnValues => returnValues != null && returnValues.length > 1;
 
   verify(ut.Mock mock) => new ExpectationBuilder().build(this, mock);
   configure(ut.Mock mock) => new StubBuilder().build(this, mock);
+
+  _takeNonEmpty(list) => list.takeWhile((_) => _ != _e).toList();
 }
