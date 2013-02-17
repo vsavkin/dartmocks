@@ -1,14 +1,7 @@
 part of dartmocks_test;
 
-testMock() {
-  group("[mock]", () {
-    test("expectations return values", () {
-      var testDouble = mock('Double');
-      testDouble.shouldReceive('method').andReturn(10);
-
-      expect(testDouble.method(), equals(10));
-    });
-
+testExpectations() {
+  group("[expectations]", () {
     test("expectations fail when not invoked", () {
       var testDouble = mock('Double');
       testDouble.shouldReceive('method');

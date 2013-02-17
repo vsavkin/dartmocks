@@ -1,51 +1,52 @@
 part of dartmocks;
 
 class TestDouble {
-  String name;
-
-  bool isNullObject = false;
-
   ut.Mock _mock;
+  List<Behaviour> _stubs = [];
+  List<Behaviour> _expectations = [];
 
-  List<Behaviour> stubs = [];
-
-  List<Behaviour> expectations = [];
+  String name;
+  bool isNullObject = false;
 
   TestDouble(this.name);
 
   asNullObject() {
     isNullObject = true;
+    return this;
   }
 
-  stub(String name) {
-    var behaviour = new Behaviour(name);
-    stubs.add(behaviour);
-    return behaviour;
+  Behaviour stub(String methodName) {
+    var b = new Behaviour(methodName);
+    _stubs.add(b);
+    return b;
   }
 
-  shouldReceive(String name) {
-    var behaviour = new Behaviour(name);
-    expectations.add(behaviour);
-    return behaviour;
-  }
-
-  noSuchMethod(InvocationMirror mirror) => mock.noSuchMethod(mirror);
-
-  configureMock() {
-    var mock = new ut.Mock.custom(name: name, throwIfNoBehavior: !isNullObject);
-    behaviours.forEach((b) => b.configure(mock));
-    return mock;
+  Behaviour shouldReceive(String methodName) {
+    var b = new Behaviour(methodName);
+    _expectations.add(b);
+    return b;
   }
 
   pure() => new PureTestDouble(this);
 
+  verify() => _expectations.forEach((b) => b.verify(mock));
+
+  noSuchMethod(mirror) => mock.noSuchMethod(mirror);
+
+  get mock {
+    if(_mock == null) _mock = _configureMock();
+    return _mock;
+  }
+
   get behaviours {
-    var s = new List.from(stubs);
-    s.addAll(expectations);
+    var s = new List.from(_stubs);
+    s.addAll(_expectations);
     return s;
   }
 
-  ut.Mock get mock => _mock = _mock == null ? configureMock() : _mock;
-
-  verify() => expectations.forEach((b) => b.verify(mock));
+  _configureMock() {
+    var mock = new ut.Mock.custom(name: name, throwIfNoBehavior: !isNullObject);
+    behaviours.forEach((b) => b.configure(mock));
+    return mock;
+  }
 }

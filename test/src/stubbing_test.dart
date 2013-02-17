@@ -1,7 +1,7 @@
 part of dartmocks_test;
 
-testStub() {
-  group("[stub]", () {
+testStubbing() {
+  group("[stubbing]", () {
     test("stubs a method without arguments", () {
       var testStub = stub('Stub');
       testStub.stub("stubbedMethod").andReturn(10);
