@@ -1,17 +1,54 @@
 part of dartmocks;
 
+class CallMatcherBuilder {
+  build(Behaviour b){
+    if (b.hasArguments) {
+      return ut.callsTo(b.methodName, b.arguments);
+    } else {
+      return ut.callsTo(b.methodName);
+    }
+  }
+}
+
+class ExpectationBuilder {
+  CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
+
+  build(Behaviour b, ut.Mock mock){
+    var callMatcher = callMatcherBuilder.build(b);
+    var verification = ut.happenedExactly(b._times);
+    mock.getLogs(callMatcher).verify(verification);
+  }
+}
+
+class StubBuilder {
+  CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
+
+  build(Behaviour b, ut.Mock mock){
+    var m = mock.when(callMatcherBuilder.build(b));
+
+    if (b.hasCallback) {
+      m.alwaysCall(b.callback);
+
+    } else if (b.throws) {
+      m.alwaysThrow(b.throwValue);
+
+    } else if (b.hasMultipleReturnValues) {
+      b.returnValues.forEach((_) => m.thenReturn(_));
+
+    } else {
+      m.alwaysReturn(b.returnValue);
+    }
+  }
+}
+
 class Behaviour {
   String methodName;
 
   var throwValue;
-
   var returnValue;
-
   List returnValues;
-
   var arguments;
-
-  var callback;
+  Function callback;
 
   int _times = 1;
 
@@ -48,46 +85,10 @@ class Behaviour {
   }
 
   bool get hasArguments => arguments != null;
-
   bool get throws => throwValue != null;
-
   bool get hasCallback => callback != null;
-
   bool get hasMultipleReturnValues => returnValues != null;
 
-  verify(ut.Mock mock) {
-    var callMatcher;
-    if (hasArguments) {
-      callMatcher = ut.callsTo(methodName, arguments);
-    } else {
-      callMatcher = ut.callsTo(methodName);
-    }
-    mock.getLogs(callMatcher).verify(ut.happenedExactly(_times));
-  }
-
-  configure(ut.Mock mock) {
-    var callMatcher;
-    if (hasArguments) {
-      callMatcher = ut.callsTo(methodName, arguments);
-    } else {
-      callMatcher = ut.callsTo(methodName);
-    }
-
-    var builder = mock.when(callMatcher);
-
-    if (hasCallback) {
-      builder.alwaysCall(callback);
-
-    } else if (throws) {
-      builder.alwaysThrow(throwValue);
-
-    } else if (hasMultipleReturnValues) {
-      for (var v in returnValues) {
-        builder.thenReturn(v);
-      }
-
-    } else {
-      builder.alwaysReturn(returnValue);
-    }
-  }
+  verify(ut.Mock mock) => new ExpectationBuilder().build(this, mock);
+  configure(ut.Mock mock) => new StubBuilder().build(this, mock);
 }
