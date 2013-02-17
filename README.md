@@ -1,6 +1,6 @@
 # DartMocks
 
-[![Build Status](https://drone.io/github.com/vsavkin/dartmocks/status.png)](https://drone.io/github.com/vsavkin/dartmocks/latest)]
+[![Build Status](https://drone.io/github.com/vsavkin/dartmocks/status.png)](https://drone.io/github.com/vsavkin/dartmocks/latest)
 
 DartMocks is a mock framework for Dart inspired by RSpec. It's built on top of unittest/mock.
 
@@ -47,6 +47,6 @@ OR
 
 For more details, see:
 
-  stubbing_test.dart
-  expectations_test.dart
-  pure_test.dart
+  * stubbing_test.dart
+  * expectations_test.dart
+  * pure_test.dart
