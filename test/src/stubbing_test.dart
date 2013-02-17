@@ -58,11 +58,27 @@ testStubbing() {
       expect(() => testStub.method(), throwsA("exception"));
     });
 
+    test("stubs that throw multiple exceptions", () {
+      var testStub = stub('Stub');
+      testStub.stub("method").andThrow("exception1", "exception2");
+
+      expect(() => testStub.method(), throwsA("exception1"));
+      expect(() => testStub.method(), throwsA("exception2"));
+    });
+
     test("stubs that calls a custom function", () {
       var testStub = stub('Stub');
       testStub.stub("method").andCall((value) => value);
 
       expect(testStub.method(10), equals(10));
+    });
+
+    test("stubs that calls multiple custom functions", () {
+      var testStub = stub('Stub');
+      testStub.stub("method").andCall((value) => value, (value) => 2 * value);
+
+      expect(testStub.method(10), equals(10));
+      expect(testStub.method(10), equals(20));
     });
 
     test("stubs behave as null objects when specified", () {
