@@ -4,7 +4,7 @@
 
 DartMocks is a mock framework for Dart inspired by RSpec. It's built on top of unittest/mock.
 
-## INSTALLATION
+## Installation
 
 Add the DartMocks dependency to your project’s pubspec.yaml.
 
