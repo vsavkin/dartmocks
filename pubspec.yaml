@@ -1,8 +1,8 @@
 name: dartmocks
-version: 0.2.0
+version: 0.2.1
 author: Victor Savkin <vic.savkin@gmail.com>
 homepage: https://github.com/vsavkin/dartmocks
 description: >
-  A mock framework for Dart inspired by RSpec.
+  A mock framework inspired by RSpec-Mocks.
 dependencies:
   unittest: any
