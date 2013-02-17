@@ -57,7 +57,7 @@ class MethodBehaviour {
 
   MethodBehaviour(this.methodName);
 
-  with(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+  args(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
     arguments = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }

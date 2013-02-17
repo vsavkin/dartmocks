@@ -20,8 +20,8 @@ testStubbing() {
 
     test("stubs with arguments", () {
       var testStub = stub('Stub');
-      testStub.stub('method').with(true).andReturn(10);
-      testStub.stub('method').with(false).andReturn(20);
+      testStub.stub('method').args(true).andReturn(10);
+      testStub.stub('method').args(false).andReturn(20);
 
       expect(testStub.method(true), equals(10));
       expect(testStub.method(false), equals(20));
@@ -29,7 +29,7 @@ testStubbing() {
 
     test("stubs with multiple arguments", () {
       var testStub = stub('Stub');
-      testStub.stub('method').with(1, true).andReturn(10);
+      testStub.stub('method').args(1, true).andReturn(10);
 
       expect(testStub.method(1, true), equals(10));
     });
