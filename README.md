@@ -44,7 +44,7 @@ OR
 
     expect(testDouble.verify, throws);
 
-## Test doubles implementing interfaces
+### Test doubles implementing interfaces
 
     abstract class Greeter {
       String greet();
@@ -60,8 +60,26 @@ And the test:
 
     expect(greet(s), equals("Result"));;
 
+### Verifying all expectations
 
-For more details, see:
+Calling verify on every created mock can be tedious. You can use `currentTestRun.verify()` instead.
+
+    group("[group]", (){
+      tearDown((){
+        currentTestRun.verify();
+      });
+
+      test("with expectations", (){
+        var double1 = mock('Double1')..shouldReceive("method1");
+        var double2 = mock('Double2')..shouldReceive("method2");
+
+        double1.method1();
+        double2.method2();
+      });
+    });
+
+
+### For more details, see:
 
   * stubbing_test.dart
   * expectations_test.dart
