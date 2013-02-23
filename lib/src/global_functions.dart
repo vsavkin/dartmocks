@@ -6,7 +6,8 @@ class _TestDoubleBuilder {
   _TestDoubleBuilder(this.arg1, this.arg2);
 
   build(){
-    var d = new TestDouble(_stubName);
+    var d = new TestDouble()
+            ..name = _stubName;
     _setupStubs(d);
     return d;
   }

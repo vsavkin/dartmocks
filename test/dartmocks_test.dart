@@ -2,7 +2,6 @@ library dartmocks_test;
 
 import 'package:dartmocks/dartmocks.dart';
 import 'package:unittest/unittest.dart';
-import 'dart:mirrors';
 
 part 'src/stubbing_test.dart';
 part 'src/expecatations_test.dart';
