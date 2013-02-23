@@ -8,7 +8,7 @@ class TestDouble {
   String name;
   bool isNullObject = false;
 
-  TestDouble(this.name);
+  TestDouble([this.name]);
 
   asNullObject() {
     isNullObject = true;
