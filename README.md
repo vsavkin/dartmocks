@@ -44,6 +44,22 @@ OR
 
     expect(testDouble.verify, throws);
 
+## Test doubles implementing interfaces
+
+    abstract class Greeter {
+      String greet();
+    }
+    String greet(Greeter m) => m.greet();
+    class GreeterDouble extends TestDouble implements Greeter {}
+
+And the test:
+
+    var s = new GreeterDouble()
+            ..name = "Greeter"
+            ..stub("greet").andReturn("Result");
+
+    expect(greet(s), equals("Result"));;
+
 
 For more details, see:
 
