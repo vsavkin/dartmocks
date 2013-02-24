@@ -8,6 +8,10 @@ class TestDouble {
   String name;
   bool isNullObject = false;
 
+  TestDouble(){
+    currentTestRun.register(this);
+  }
+
   asNullObject() {
     isNullObject = true;
     return this;

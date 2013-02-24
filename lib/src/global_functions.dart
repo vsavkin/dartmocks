@@ -26,3 +26,4 @@ class _TestDoubleBuilder {
 
 stub([arg1, arg2]) => new _TestDoubleBuilder(arg1, arg2).build();
 mock([String name]) => new _TestDoubleBuilder(name, null).build();
+var currentTestRun = new TestRun();
