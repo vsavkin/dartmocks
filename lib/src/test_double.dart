@@ -7,6 +7,7 @@ class TestDouble {
 
   String name;
   bool isNullObject = false;
+  var real;
 
   TestDouble(){
     currentTestRun.register(this);
@@ -33,7 +34,25 @@ class TestDouble {
 
   verify() => _expectations.forEach((b) => b.verify(mock));
 
-  noSuchMethod(mirror) => mock.noSuchMethod(mirror);
+  noSuchMethod(InvocationMirror mirror){
+    try {
+      return mock.noSuchMethod(mirror);
+    } on Exception catch (e){
+      if(real != null && _noBehaviorSpecified(e)){
+        return _tryCallingOnReal(mirror, e);
+      }
+      throw e;
+    }
+  }
+
+  _noBehaviorSpecified(e) => e.message.contains("No behavior specified for method");
+  _tryCallingOnReal(mirror, originalException){
+    try {
+      return mirror.invokeOn(real);
+    } on NoSuchMethodError {
+      throw originalException;
+    }
+  }
 
   get mock {
     if(_mock == null) _mock = _configureMock();
