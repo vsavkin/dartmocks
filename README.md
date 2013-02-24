@@ -78,6 +78,16 @@ Calling verify on every created mock can be tedious. You can use `currentTestRun
       });
     });
 
+### Partial test doubles
+
+Though using partial test doubles is considered to be a bad practice, it can be useful sometimes.
+
+    partial = stub()
+              ..real = [1, 2, 3]
+              ..stub("get size").andReturn(1000);
+
+    expect(partial.size, equals(1000));
+    expect(partial.first, equals(1));
 
 ### For more details, see:
 
