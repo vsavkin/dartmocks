@@ -8,6 +8,7 @@ part 'src/expecatations_test.dart';
 part 'src/pure_test.dart';
 part 'src/with_interfaces_test.dart';
 part 'src/test_current_run_test.dart';
+part 'src/partial_test.dart';
 
 main() {
   testStubbing();
@@ -15,4 +16,5 @@ main() {
   testPure();
   testWithInterfaces();
   testCurrentTestRun();
+  testPartial();
 }
