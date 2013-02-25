@@ -143,7 +143,7 @@ A partial test double, being an anti pattern, can still be useful in some situat
 
 ### Pure
 
-If you don't want your test double to respond to framework methods (e.g., `stub` or `shouldReceive`), call pure on it. The `pure` method returns a test double that can only respond to the messages you configured.
+If you don't want your test double to respond to framework methods (e.g., `stub` or `shouldReceive`), call pure on it. The `pure` method returns a test double that can only responds to the messages you configured.
 
     test("pure", (){
       var player = stub({"get isOn" : true});
