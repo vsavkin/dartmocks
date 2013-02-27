@@ -236,3 +236,7 @@ To fix it you have to create a test double implementing the Player interface.
       expect(remote.turnUp(), equals(0));
     });
 
+
+## Special Thanks
+
+The initial version of DartMocks was written by Sean Kirby and me at one of hackathons organized by [Nulogy](http://www.nulogy.com/).
