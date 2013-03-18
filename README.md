@@ -243,4 +243,4 @@ To fix it you have to create a test double implementing the Player interface.
 
 ## Special Thanks
 
-The initial version of DartMocks was written by Sean Kirby and me at one of hackathons organized by [Nulogy](http://www.nulogy.com/).
+The initial version of DartMocks was written by [Sean Kirby](https://github.com/sskirby) and me at one of hackathons organized by [Nulogy](http://www.nulogy.com/).
