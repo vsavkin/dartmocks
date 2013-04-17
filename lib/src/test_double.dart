@@ -34,7 +34,7 @@ class TestDouble {
 
   verify() => _expectations.forEach((b) => b.verify(mock));
 
-  noSuchMethod(InvocationMirror mirror){
+  noSuchMethod(Invocation mirror){
     try {
       return mock.noSuchMethod(mirror);
     } on Exception catch (e){
@@ -46,6 +46,7 @@ class TestDouble {
   }
 
   _noBehaviorSpecified(e) => e.message.contains("No behavior specified for method");
+  
   _tryCallingOnReal(mirror, originalException){
     try {
       return mirror.invokeOn(real);
