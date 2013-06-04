@@ -34,12 +34,12 @@ class TestDouble {
 
   verify() => _expectations.forEach((b) => b.verify(mock));
 
-  noSuchMethod(Invocation mirror){
+  noSuchMethod(Invocation invocation){
     try {
-      return mock.noSuchMethod(mirror);
+      return mock.noSuchMethod(invocation);
     } on Exception catch (e){
       if(real != null && _noBehaviorSpecified(e)){
-        return _tryCallingOnReal(mirror, e);
+        return _tryCallingOnReal(invocation, e);
       }
       throw e;
     }
@@ -47,9 +47,9 @@ class TestDouble {
 
   _noBehaviorSpecified(e) => e.message.contains("No behavior specified for method");
   
-  _tryCallingOnReal(mirror, originalException){
+  _tryCallingOnReal(invocation, originalException){
     try {
-      return mirror.invokeOn(real);
+      return reflect(real).delegate(invocation);
     } on NoSuchMethodError {
       throw originalException;
     }
