@@ -1,5 +1,6 @@
 part of dartmocks;
 
+@proxy
 class TestDouble {
   ut.Mock _mock;
   List<MethodBehaviour> _stubs = [];
