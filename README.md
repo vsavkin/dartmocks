@@ -224,11 +224,7 @@ Both the `mock` and `stub` functions return an instance of `TestDouble`. Which m
 
 ### TestDouble Implementing an Interface
 
-If you run your app in the checked mode, the following code will throw an exception:
-
-    Player player = stub();
-
-To fix it you have to create a test double implementing the Player interface.
+There are a few good reasons to implement an interface (e.g., tooling). It can be done as follows:
 
     class TestDoublePlayer extends TestDouble implements Player {}
 
