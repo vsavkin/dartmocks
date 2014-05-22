@@ -237,6 +237,8 @@ There are a few good reasons to implement an interface (e.g., tooling). It can b
     });
 
 
-## Special Thanks
+## Contributors
 
-The initial version of DartMocks was written by [Sean Kirby](https://github.com/sskirby) and me at one of hackathons organized by [Nulogy](http://www.nulogy.com/).
+* Victor Savkin
+* Sean Kirby
+* Victor Berchet
