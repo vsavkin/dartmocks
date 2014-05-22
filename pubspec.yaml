@@ -5,6 +5,9 @@ homepage: https://github.com/vsavkin/dartmocks
 description: >
   A mock framework inspired by RSpec-Mocks.
 dependencies:
-  unittest: ">= 0.8.7"
+  mock: ">=0.11.0+1 <0.12.0"
+  matcher: ">=0.10.0 <0.11.0"
+dev_dependencies:
+  unittest: ">=0.11.0 <0.12.0"
 environment:
-  sdk: ">=0.8.7 <2.0.0"
+  sdk: ">=1.0.0 <2.0.0"
