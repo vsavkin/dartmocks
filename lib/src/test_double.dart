@@ -47,7 +47,7 @@ class TestDouble {
   }
 
   _noBehaviorSpecified(e) => e.message.contains("No behavior specified for method");
-  
+
   _tryCallingOnReal(invocation, originalException){
     try {
       return reflect(real).delegate(invocation);

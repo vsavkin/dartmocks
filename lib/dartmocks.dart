@@ -1,8 +1,8 @@
 library dartmocks;
 
 import 'dart:mirrors';
-import 'package:unittest/mock.dart' as ut;
-import 'package:unittest/matcher.dart' as matchers;
+import 'package:mock/mock.dart' as ut;
+import 'package:matcher/matcher.dart' as matchers;
 
 part 'src/behaviour.dart';
 part 'src/pure_test_double.dart';
