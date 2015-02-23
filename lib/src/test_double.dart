@@ -10,7 +10,7 @@ class TestDouble {
   bool isNullObject = false;
   var real;
 
-  TestDouble(){
+  TestDouble() {
     currentTestRun.register(this);
   }
 
@@ -35,20 +35,21 @@ class TestDouble {
 
   verify() => _expectations.forEach((b) => b.verify(mock));
 
-  noSuchMethod(Invocation invocation){
+  noSuchMethod(Invocation invocation) {
     try {
       return mock.noSuchMethod(invocation);
-    } on Exception catch (e){
-      if(real != null && _noBehaviorSpecified(e)){
+    } on Exception catch (e) {
+      if (real != null && _noBehaviorSpecified(e)) {
         return _tryCallingOnReal(invocation, e);
       }
       throw e;
     }
   }
 
-  _noBehaviorSpecified(e) => e.message.contains("No behavior specified for method");
+  _noBehaviorSpecified(e) =>
+      e.message.contains("No behavior specified for method");
 
-  _tryCallingOnReal(invocation, originalException){
+  _tryCallingOnReal(invocation, originalException) {
     try {
       return reflect(real).delegate(invocation);
     } on NoSuchMethodError {
@@ -57,7 +58,7 @@ class TestDouble {
   }
 
   get mock {
-    if(_mock == null) _mock = _configureMock();
+    if (_mock == null) _mock = _configureMock();
     return _mock;
   }
 
