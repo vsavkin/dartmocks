@@ -1,7 +1,7 @@
 part of dartmocks;
 
 class CallMatcherBuilder {
-  build(MethodBehaviour b){
+  build(MethodBehaviour b) {
     var cm = new ut.CallMatcher();
     cm.nameFilter = matchers.wrapMatcher(b.methodName);
     cm.argMatchers = b.arguments.map((_) => matchers.wrapMatcher(_)).toList();
@@ -12,7 +12,7 @@ class CallMatcherBuilder {
 class ExpectationBuilder {
   CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
 
-  build(MethodBehaviour b, ut.Mock mock){
+  build(MethodBehaviour b, ut.Mock mock) {
     var callMatcher = callMatcherBuilder.build(b);
     var verification = ut.happenedExactly(b._times);
     mock.getLogs(callMatcher).verify(verification);
@@ -22,11 +22,11 @@ class ExpectationBuilder {
 class StubBuilder {
   CallMatcherBuilder callMatcherBuilder = new CallMatcherBuilder();
 
-  build(MethodBehaviour b, ut.Mock mock){
+  build(MethodBehaviour b, ut.Mock mock) {
     var m = mock.when(callMatcherBuilder.build(b));
 
-    if(b.throws){
-      if(b.throwsMultiple){
+    if (b.throws) {
+      if (b.throwsMultiple) {
         b.throwValues.forEach((_) => m.thenThrow(_));
       } else {
         m.alwaysThrow(b.throwValues.first);
@@ -34,8 +34,8 @@ class StubBuilder {
       return;
     }
 
-    if(b.hasCallbacks){
-      if(b.multipleCallbacks){
+    if (b.hasCallbacks) {
+      if (b.multipleCallbacks) {
         b.callbacks.forEach((_) => m.thenCall(_));
       } else {
         m.alwaysCall(b.callbacks.first);
@@ -43,8 +43,8 @@ class StubBuilder {
       return;
     }
 
-    if(b.returns){
-      if(b.multipleReturnValues){
+    if (b.returns) {
+      if (b.multipleReturnValues) {
         b.returnValues.forEach((_) => m.thenReturn(_));
       } else {
         m.alwaysReturn(b.returnValues.first);
@@ -56,7 +56,7 @@ class StubBuilder {
   }
 }
 
-class _Empty{
+class _Empty {
   const _Empty();
 }
 const _e = const _Empty();
@@ -73,22 +73,26 @@ class MethodBehaviour {
 
   MethodBehaviour(this.methodName);
 
-  args(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+  args(a0, [a1 = _e, a2 = _e, a3 = _e, a4 = _e, a5 = _e, a6 = _e, a7 = _e,
+      a8 = _e, a9 = _e]) {
     arguments = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }
 
-  andReturn(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+  andReturn(a0, [a1 = _e, a2 = _e, a3 = _e, a4 = _e, a5 = _e, a6 = _e, a7 = _e,
+      a8 = _e, a9 = _e]) {
     returnValues = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }
 
-  andThrow(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+  andThrow(a0, [a1 = _e, a2 = _e, a3 = _e, a4 = _e, a5 = _e, a6 = _e, a7 = _e,
+      a8 = _e, a9 = _e]) {
     throwValues = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }
 
-  andCall(a0, [a1=_e, a2 =_e, a3=_e, a4=_e, a5=_e, a6=_e, a7=_e, a8=_e, a9=_e]) {
+  andCall(a0, [a1 = _e, a2 = _e, a3 = _e, a4 = _e, a5 = _e, a6 = _e, a7 = _e,
+      a8 = _e, a9 = _e]) {
     callbacks = _takeNonEmpty([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9]);
     return this;
   }

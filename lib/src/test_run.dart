@@ -7,8 +7,8 @@ class TestRun {
 
   void clear() => testDoubles.clear();
 
-  void verify(){
-    try{
+  void verify() {
+    try {
       testDoubles.forEach((_) => _.verify());
     } finally {
       clear();

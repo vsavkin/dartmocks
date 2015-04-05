@@ -5,16 +5,15 @@ class _TestDoubleBuilder {
 
   _TestDoubleBuilder(this.arg1, this.arg2);
 
-  build(){
-    var d = new TestDouble()
-            ..name = _stubName;
+  build() {
+    var d = new TestDouble()..name = _stubName;
     _setupStubs(d);
     return d;
   }
 
-  _setupStubs(d){
-    if(_stubConfig != null){
-      _stubConfig.forEach((methodName, returnValue){
+  _setupStubs(d) {
+    if (_stubConfig != null) {
+      _stubConfig.forEach((methodName, returnValue) {
         d.stub(methodName).andReturn(returnValue);
       });
     }

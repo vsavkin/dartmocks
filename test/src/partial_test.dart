@@ -6,8 +6,8 @@ testPartial() {
 
     setUp(() {
       partial = stub()
-                ..real = [1, 2, 3]
-                ..stub("get size").andReturn(1000);
+        ..real = [1, 2, 3]
+        ..stub("get size").andReturn(1000);
     });
 
     test("calls the stub method when available", () {

@@ -42,7 +42,9 @@ testStubbing() {
       expect(testStub.stubbedMethod(), equals(20));
     });
 
-    test("stubs with consecutive return values throw an exception when no more return values", () {
+    test(
+        "stubs with consecutive return values throw an exception when no more return values",
+        () {
       var testStub = stub('Stub');
       testStub.stub("stubbedMethod").andReturn(10, 20);
 
@@ -101,16 +103,12 @@ testStubbing() {
     });
 
     test("stub initialized with a map", () {
-      var testStub = stub("Stub", {
-          "method" : 10
-      });
+      var testStub = stub("Stub", {"method": 10});
       expect(testStub.method(), equals(10));
     });
 
     test("name is optional", () {
-      var testStub = stub({
-          "method" : 10
-      });
+      var testStub = stub({"method": 10});
       expect(testStub.method(), equals(10));
     });
   });

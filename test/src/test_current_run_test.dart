@@ -1,12 +1,12 @@
 part of dartmocks_test;
 
 testCurrentTestRun() {
-  group("[currentTestRun]", (){
-    setUp((){
+  group("[currentTestRun]", () {
+    setUp(() {
       currentTestRun.clear();
     });
 
-    test("returns normally when all expectations are met", (){
+    test("returns normally when all expectations are met", () {
       var double1 = mock('Double1')..shouldReceive("method1");
       var double2 = mock('Double2')..shouldReceive("method2");
 
@@ -16,7 +16,7 @@ testCurrentTestRun() {
       expect(currentTestRun.verify, returnsNormally);
     });
 
-    test("throws when some expectations are not met", (){
+    test("throws when some expectations are not met", () {
       var double1 = mock('Double1')..shouldReceive("method1");
       var double2 = mock('Double2')..shouldReceive("method2");
 
